@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>React 101</title>
+   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   <style>
+       .heading{
+           color:pink;
+       }
+   </style>
+ </head>
+ <body>
+   <div id="root"></div>
+   <script type="text/babel">
+    let girl="Rebecca";
+    
+
+    class Hello extends React.Component {
+            state = {
+                loggin: true
+            };
+            LogIn = () => {
+                
+                this.setState({loggin:!this.state.loggin});
+            } 
+            render() {
+                return (<div>
+                    <button onClick={this.LogIn}>log in</button>
+                    <div>
+                    
+                        The user state is {
+                            this.state.loggin
+                                ? "logged in" : "not logged in"
+                        }.
+            </div>
+                    <h1 className="heading">Ay yo {girl}</h1>
+                    <App />
+                    <Lake name="ay sup" />
+                </div>)
+            }
+        }
+
+    //have to capitalize the name of function, lower case wont work
+    //props can be named anything: human, love, baby like const Hello=(baby)=>
+    //if only 1 props, use (), if more than 1 props, use ({})
+    //can do multiple props like this. This is de-structure
+    
+    /*const Hello= ({na, em}) =>(
+            <p className="heading">It's me, {na}</p>
+            <p className="heading">Glad you are in a {em} mood today</p>
+            
+        );*/
+
+    const Lake =({lake})=><h1>Lake: {lake.name}</h1>;
+    const Onsen =({onsen})=><h1>Onsen: {onsen}</h1>;
+    
+
+    const App =()=>(
+            <Lake name="tally ho"/>
+        );
+
+
+    const Vacation =({season})=>(
+        <div>
+        {season?<Lake name="tally"/>:<Onsen onsen="tt"/>}
+        </div>
+    );
+    const Lakelist=["superlake","smalllake","lakeness"];
+    const Coollakelist=[
+        {id:1, name:"superlake", trailhead:"supremelake"},
+        {id:2,name:"smalllake", trailhead:"smollake"},
+        {id:3,name:"lakeness", trailhead:"famouslake"},
+    ];
+
+    const DoLake=({lakes})=>(
+        <ul>
+        {lakes.map(b=>
+            <li key={b.id}>{b.name}|trailhead:{b.trailhead}</li>
+        )}
+
+        </ul>
+    );
+       ReactDOM.render(
+           //can only render 1 element at a time
+              //<Hello na="Min" em="happy"/>,
+              //<Vacation season={false}/>,
+              //<DoLake lakes={Lakelist}/>,
+              <DoLake lakes={Coollakelist}/>,
+           document.getElementById("root"),
+       );
+   </script>
+ </body>
+</html>
