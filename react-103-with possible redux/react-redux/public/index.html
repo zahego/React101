@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="weather app" content="react with redux" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <title>React App</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const data = [{ greeting: "ay", id: 1 },
+    { greeting: "yo", id: 2 },
+    { greeting: "hi", id: 3 },]
+
+    
+    const NowEating=props=><h1>{props.mealz}</h1>
+    class Menu extends React.Component{
+      state={
+          meal:"spaghetti"
+        }
+      addSideDish=()=>{
+        this.setState(prevState=>{
+          return{meal:`${prevState.meal} and salad`}
+        })
+        console.log(this.state.meal);
+      }
+      render(){
+        
+        return(<div>
+                <NowEating mealz={this.state.meal}/>
+                {(this.state.meal==="spaghetti")?<button onClick={this.addSideDish}>Add side dish</button>:null}
+                </div>)}
+      }
+    
+
+    const Greeting = ({ data }) => {
+      return (
+        <ul>
+          {data.map(d => (
+            <li key={d.id}>{d.greeting}</li>
+          ))}
+        </ul>
+      )
+      //to render full list of object, use [] instead of () for return
+      /* return [
+         <li key={1}>Hello</li>,
+         <li key={2}>Sup</li>,
+         <li key={3}>af</li>
+     ]*/
+    }
+
+    const Vote=({atAge=true, children})=>(
+      (atAge)?React.Children.only(children):null
+    )
+    
+    const age=18
+    class SendNuff extends React.Component{
+      state={
+        mesage:''
+      }
+      handleChange=e=>{
+        this.setState({
+          mesage:e.target.value
+        });
+      }
+      handlersubmit=e=>{
+        alert(this.state.mesage);
+        e.preventDefault;
+      }
+      handler=e=>{
+        alert(this.input.value);
+        e.preventDefault;
+      }
+      render(){
+        return(
+          <form onSubmit={this.handlersubmit}>
+            <label>
+              Send nudes:
+              <input type="text" value={this.state.mesage} onChange={this.handleChange} />
+              <button>Send the nudes, bro</button>
+            </label>
+          </form>
+        )
+      }
+    }
+
+
+   /* ReactDOM.render(
+      <SendNuff />,
+      //<Vote atAge={age>=18}><h1>You can vote</h1></Vote>,
+      //<Menu />,
+      //<Greeting data={data}/>,
+      document.getElementById("root")
+
+    )*/
+  </script>
+</body>
+
+</html>
